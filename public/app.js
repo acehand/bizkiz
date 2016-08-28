@@ -65,6 +65,7 @@ var Payments = {
   totalFee : 0,
   chartingDataJson : [],
   paymentDiv : $('#payments'),
+  totalDiv : $('#total'),
   init : function(data, chartingDataJson) {
     var itemString = '';
     data.forEach((item) => {
@@ -133,7 +134,7 @@ var Payments = {
 </div>
 </div>
     `;
-  this.paymentDiv.append(total);
+  this.totalDiv.append(total);
     this.bindEvents();
     return chartingDataJson;
   },
