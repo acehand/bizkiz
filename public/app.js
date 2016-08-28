@@ -1,19 +1,23 @@
 var chartingData = {}
+var chartingFeeData = {}
 
 var Charts = {
   init: function(data) {
-    console.log(data);
     if(chartingData[moment(data.transactionData.date).format('YYYY-MM-DD')]) {
       chartingData[moment(data.transactionData.date).format('YYYY-MM-DD')] += data.amount;
     } else {
       chartingData[moment(data.transactionData.date).format('YYYY-MM-DD')] = data.amount;
     }
-    console.log(chartingData);
+
+    if(chartingFeeData[moment(data.transactionData.date).format('YYYY-MM-DD')]) {
+      chartingFeeData[moment(data.transactionData.date).format('YYYY-MM-DD')] += data.fee;
+    } else {
+      chartingFeeData[moment(data.transactionData.date).format('YYYY-MM-DD')] = data.fee;
+    }
   }
 };
 
 function fn(chartingDataJson) {
-  console.log("Here" + chartingDataJson);
   var chart = AmCharts.makeChart("chartdiv", {
     "type": "serial",
     "theme": "none",
@@ -33,22 +37,23 @@ function fn(chartingDataJson) {
         "shadowAlpha": 0
     },
     "graphs": [{
-        "id": "g1",
-        "balloon":{
-          "drop":true,
-          "adjustBorderColor":false,
-          "color":"#ffffff"
-        },
+        "valueAxis": "v1",
+        "lineColor": "#FF6600",
         "bullet": "round",
-        "bulletBorderAlpha": 1,
-        "bulletColor": "#FFFFFF",
-        "bulletSize": 5,
-        "hideBulletsCount": 50,
-        "lineThickness": 2,
+        "bulletBorderThickness": 1,
+        "hideBulletsCount": 30,
         "title": "red line",
-        "useLineColorForBulletBorder": true,
-        "valueField": "value",
-        "balloonText": "<span style='font-size:18px;'>[[value]]</span>"
+        "valueField": "Received",
+		    "fillAlphas": 0
+    }, {
+        "valueAxis": "v2",
+        "lineColor": "#FCD202",
+        "bullet": "square",
+        "bulletBorderThickness": 1,
+        "hideBulletsCount": 30,
+        "title": "yellow line",
+        "valueField": "LessFees",
+		    "fillAlphas": 0
     }],
     "chartScrollbar": {
         "graph": "g1",
@@ -130,20 +135,15 @@ var Payments = {
       } else {
         pvVal = ',';
       }
-      // var chartDt = {
-      //   "date": key,
-      //   "value": chartingData[key]
-      // }
-      // chartingDataJson.push(chartDt);
 
       tempData += '{"date" : "' + key +'",';
-      tempData += '"value" : ' + chartingData[key] +'}';
+      tempData += '"Received" : "' + (chartingData[key] - chartingFeeData[key]) +'",';
+      tempData += '"LessFees" : ' + chartingData[key] +'}';
 
       chartingDataJson = tempData + pvVal + chartingDataJson;
 
     }
     chartingDataJson = '[' + chartingDataJson + ']';
-    console.info('first print' + chartingDataJson);
     this.paymentDiv.append(itemString);
     this.bindEvents();
     return chartingDataJson;
