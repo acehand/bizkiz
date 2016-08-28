@@ -18,85 +18,43 @@ var Charts = {
 };
 
 function fn(chartingDataJson) {
+  console.info(chartingDataJson)
   var chart = AmCharts.makeChart("chartdiv", {
+    "theme": "light",
     "type": "serial",
-    "theme": "none",
-    "marginRight": 40,
-    "marginLeft": 40,
-    "autoMarginOffset": 20,
-    "mouseWheelZoomEnabled":true,
-    "dataDateFormat": "YYYY-MM-DD",
+    "dataProvider": JSON.parse(chartingDataJson),
     "valueAxes": [{
-        "id": "v1",
-        "axisAlpha": 0,
+        "stackType": "3d",
+        "unit": "%",
         "position": "left",
-        "ignoreAxisWidth":true
+        "title": "GDP growth rate",
     }],
-    "balloon": {
-        "borderThickness": 1,
-        "shadowAlpha": 0
-    },
+    "startDuration": 1,
     "graphs": [{
-        "valueAxis": "v1",
-        "lineColor": "#FF6600",
-        "bullet": "round",
-        "bulletBorderThickness": 1,
-        "hideBulletsCount": 30,
-        "title": "red line",
-        "valueField": "Received",
-		    "fillAlphas": 0,
-        "balloonText": "Amount Received"
+        "balloonText": "Amount Received on [[category]] : <b>[[value]]</b>",
+        "fillAlphas": 0.9,
+        "lineAlpha": 0.2,
+        "title": "2004",
+        "type": "column",
+        "valueField": "Received"
     }, {
-        "valueAxis": "v2",
-        "lineColor": "#FCD202",
-        "bullet": "square",
-        "bulletBorderThickness": 1,
-        "hideBulletsCount": 30,
-        "title": "yellow line",
-        "valueField": "LessFees",
-		    "fillAlphas": 0,
-        "balloonText": "Received Less Fees"
+        "balloonText": "Received Less Fees on [[category]] (2005): <b>[[value]]</b>",
+        "fillAlphas": 0.9,
+        "lineAlpha": 0.2,
+        "title": "2005",
+        "type": "column",
+        "valueField": "LessFees"
     }],
-    "chartScrollbar": {
-        "graph": "g1",
-        "oppositeAxis":false,
-        "offset":30,
-        "scrollbarHeight": 80,
-        "backgroundAlpha": 0,
-        "selectedBackgroundAlpha": 0.1,
-        "selectedBackgroundColor": "#888888",
-        "graphFillAlpha": 0,
-        "graphLineAlpha": 0.5,
-        "selectedGraphFillAlpha": 0,
-        "selectedGraphLineAlpha": 1,
-        "autoGridCount":true,
-        "color":"#AAAAAA"
-    },
-    "chartCursor": {
-        "pan": true,
-        "valueLineEnabled": true,
-        "valueLineBalloonEnabled": true,
-        "cursorAlpha":1,
-        "cursorColor":"#258cbb",
-        "limitToGraph":"g1",
-        "valueLineAlpha":0.2,
-        "valueZoomable":true
-    },
-    "valueScrollbar":{
-      "oppositeAxis":false,
-      "offset":50,
-      "scrollbarHeight":10
-    },
+    "plotAreaFillAlphas": 0.1,
+    "depth3D": 60,
+    "angle": 30,
     "categoryField": "date",
     "categoryAxis": {
-        "parseDates": true,
-        "dashLength": 1,
-        "minorGridEnabled": true
+        "gridPosition": "start"
     },
     "export": {
-        "enabled": true
-    },
-    "dataProvider": JSON.parse(chartingDataJson)
+    	"enabled": true
+     }
 });
 }
 
