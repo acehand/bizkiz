@@ -50,18 +50,6 @@ class Service {
 module.exports = function(){
   const app = this;
   var that=this;
-  // client.payment.list({max: 30}, function(errData, data){
-  //   if(errData){
-  //       console.error("Error Message: " + errData.data.error.message);
-  //       return;
-  //   }
-  //   console.log("Total: " + data.total);
-  //   that.localData = data;
-  //   for(var i=0; i < data.list.length; i++){
-  //     console.log("Amount: " + data.list[i].amount);
-  //   }
-  // });
-  // Initialize our service with any options it requires
   app.use('/payments', new Service({
     timeout : 10000,
     client : client.payment
