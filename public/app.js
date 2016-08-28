@@ -105,6 +105,35 @@ var Payments = {
     }
     chartingDataJson = '[' + chartingDataJson + ']';
     this.paymentDiv.append(itemString);
+    var total =`
+    <div class="ui statistics">
+<div class="statistic">
+  <div class="value">
+    $${this.totalPaid}
+  </div>
+  <div class="label">
+    Total Payments
+  </div>
+</div>
+<div class="statistic">
+  <div class="value">
+    $${this.totalFee}
+  </div>
+  <div class="label">
+    Fees Lost
+  </div>
+</div>
+<div class="statistic">
+  <div class="value">
+    $${this.totalPaid - this.totalFee}
+  </div>
+  <div class="label">
+    Total Received
+  </div>
+</div>
+</div>
+    `;
+  this.paymentDiv.append(total);
     this.bindEvents();
     return chartingDataJson;
   },
@@ -159,13 +188,8 @@ app.authenticate().then(
     chartingDataJson = Payments.init(data.list, chartingDataJson);
     fn(chartingDataJson);
   });
-  userService.find().then(
-    page => {});
-    // const users = page.data;
-    // Add every user to the list
-    // users.forEach(addUser);
-  // });
+  userService.get(12).then(page => {
 
-  // We will also see when new users get created in real-time
-  // userService.on('created', addUser);
+    $('a.profile span').text(page.email);
+  });
 });
