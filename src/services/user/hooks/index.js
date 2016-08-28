@@ -17,10 +17,11 @@ exports.before = {
     auth.verifyToken(),
     auth.populateUser(),
     auth.restrictToAuthenticated(),
-    auth.restrictToOwner({ ownerField: 'id' })
+    auth.restrictToOwner({ ownerField: 'id' }),
   ],
   create: [
-    auth.hashPassword()
+    auth.hashPassword(),
+    profile()
   ],
   update: [
     auth.verifyToken(),

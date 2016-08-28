@@ -201,13 +201,8 @@ app.authenticate().then(
     chartingDataJson = Payments.init(data.list, chartingDataJson);
     fn(chartingDataJson);
   });
-  userService.find().then(
-    page => {});
-    // const users = page.data;
-    // Add every user to the list
-    // users.forEach(addUser);
-  // });
-
-  // We will also see when new users get created in real-time
-  // userService.on('created', addUser);
+  userService.get(12).then(page => {
+    console.log(page);
+    $('a.profile').attr('src', page.avatar);
+  });
 });
