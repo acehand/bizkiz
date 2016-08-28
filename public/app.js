@@ -147,6 +147,35 @@ var Payments = {
     }
     chartingDataJson = '[' + chartingDataJson + ']';
     this.paymentDiv.append(itemString);
+    var total =`
+    <div class="ui statistics">
+<div class="statistic">
+  <div class="value">
+    $${this.totalPaid}
+  </div>
+  <div class="label">
+    Total Payments
+  </div>
+</div>
+<div class="statistic">
+  <div class="value">
+    $${this.totalFee}
+  </div>
+  <div class="label">
+    Fees Lost
+  </div>
+</div>
+<div class="statistic">
+  <div class="value">
+    $${this.totalPaid - this.totalFee}
+  </div>
+  <div class="label">
+    Total Received
+  </div>
+</div>
+</div>
+    `;
+  this.paymentDiv.append(total);
     this.bindEvents();
     return chartingDataJson;
   },
@@ -202,7 +231,7 @@ app.authenticate().then(
     fn(chartingDataJson);
   });
   userService.get(12).then(page => {
-    console.log(page);
-    $('a.profile').attr('src', page.avatar);
+
+    $('a.profile span').text(page.email);
   });
 });
