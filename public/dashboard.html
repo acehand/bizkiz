@@ -4,20 +4,27 @@
     <meta name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
     <title>Feathers Chat</title>
+
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.1.0/public/base.css">
     <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.1.0/public/chat.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="base.css">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
     <script src="//code.jquery.com/jquery-2.2.1.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
-    <script src="//npmcdn.com/feathers-client@^1.0.0/dist/feathers.js">
-    </script>
+    <script src="//npmcdn.com/feathers-client@^1.0.0/dist/feathers.js"></script>
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/babel" src="app.js"></script>
+    <script src="https://www.amcharts.com/lib/3/themes/none.js"></script>
   </head>
   <body>
     <div id="app" class="flex flex-column">
@@ -61,7 +68,11 @@
           </div>
         </div>
       </div>
-      <div class="column four wide column transactions"></div>
+      <div class="column">
+        <div id="chartdiv">
+          Chart View
+        </div>
+      </div>
   </div>
   </body>
 </html>
