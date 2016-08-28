@@ -44,7 +44,8 @@ function fn(chartingDataJson) {
         "hideBulletsCount": 30,
         "title": "red line",
         "valueField": "Received",
-		    "fillAlphas": 0
+		    "fillAlphas": 0,
+        "balloonText": "Amount Received"
     }, {
         "valueAxis": "v2",
         "lineColor": "#FCD202",
@@ -53,7 +54,8 @@ function fn(chartingDataJson) {
         "hideBulletsCount": 30,
         "title": "yellow line",
         "valueField": "LessFees",
-		    "fillAlphas": 0
+		    "fillAlphas": 0,
+        "balloonText": "Received Less Fees"
     }],
     "chartScrollbar": {
         "graph": "g1",
